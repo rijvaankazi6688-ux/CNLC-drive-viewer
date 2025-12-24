@@ -95,3 +95,4 @@ function toggleDark() {
 
 // Initial load
 loadFolder(ROOT_FOLDER_ID);
+
