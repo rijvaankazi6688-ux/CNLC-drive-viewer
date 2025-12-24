@@ -1,4 +1,3 @@
-alert("script.js loaded");
 const API_KEY = "AIzaSyDWQsVnpG_CZVP6xRYMqbBipd7R8OV5hU0";
 const ROOT_FOLDER_ID = "1vabZ842htVTx745S7y8QuHO3CJNExYtn";
 
@@ -17,25 +16,16 @@ function icon(type) {
 }
 
 function loadFolder(folderId) {
-  document.body.innerHTML += "<p>JS is running</p>";
+  list.innerHTML = `<p class="col-span-full text-center dark:text-white">Loading...</p>`;
+  backBtn.classList.toggle("hidden", folderStack.length <= 1);
 
-  fetch(
-    `https://www.googleapis.com/drive/v3/files` +
-    `?q='${folderId}'+in+parents` +
-    `&supportsAllDrives=true` +
-    `&includeItemsFromAllDrives=true` +
-    `&fields=files(id,name,mimeType)` +
-    `&key=${API_KEY}`
-  )
-  .then(res => res.json())
-  .then(data => {
-    document.body.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-  })
-  .catch(err => {
-    document.body.innerHTML += `<pre>${err}</pre>`;
-  });
+  fetch(`https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType)`)
+    .then(res => res.json())
+    .then(data => {
+      currentItems = data.files;
+      renderItems(currentItems);
+    });
 }
-
 
 function renderItems(items) {
   list.innerHTML = "";
@@ -105,7 +95,3 @@ function toggleDark() {
 
 // Initial load
 loadFolder(ROOT_FOLDER_ID);
-
-
-
-
