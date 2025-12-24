@@ -1,3 +1,4 @@
+alert("script.js loaded");
 const API_KEY = "AIzaSyDWQsVnpG_CZVP6xRYMqbBipd7R8OV5hU0";
 const ROOT_FOLDER_ID = "1vabZ842htVTx745S7y8QuHO3CJNExYtn";
 
@@ -104,5 +105,6 @@ function toggleDark() {
 
 // Initial load
 loadFolder(ROOT_FOLDER_ID);
+
 
 
